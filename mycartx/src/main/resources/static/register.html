@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - MyCartX</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f2f5f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+  <div style="background: #fff; padding: 40px 50px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 350px; max-width: 90%; text-align: center;">
+    <h1 style="color: #007bff; margin-bottom: 20px;">Create Account</h1>
+    <form id="registerForm" style="display: flex; flex-direction: column;">
+      <input type="text" name="name" id="name" placeholder="Full Name" required style="margin: 10px 0; padding: 12px; border: 1px solid #ccc; border-radius: 8px;">
+      <input type="email" name="email" id="email" placeholder="Email" required style="margin: 10px 0; padding: 12px; border: 1px solid #ccc; border-radius: 8px;">
+      <input type="password" name="password" id="password" placeholder="Password" required style="margin: 10px 0; padding: 12px; border: 1px solid #ccc; border-radius: 8px;">
+      <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required style="margin: 10px 0; padding: 12px; border: 1px solid #ccc; border-radius: 8px;">
+      <input type="text" name="phone" id="phone" placeholder="Phone Number" style="margin: 10px 0; padding: 12px; border: 1px solid #ccc; border-radius: 8px;">
+      <input type="text" name="address" id="address" placeholder="Address" style="margin: 10px 0; padding: 12px; border: 1px solid #ccc; border-radius: 8px;">
+      <button type="submit" style="background: #007bff; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; margin-top: 10px; transition: background 0.3s;">Register</button>
+    </form>
+    <p style="margin-top: 20px;">Already have an account? <a href="login.html" style="color: #007bff; text-decoration: none;">Login</a></p>
+  </div>
+  <script src="js/register.js"></script>
+</body>
+</html>

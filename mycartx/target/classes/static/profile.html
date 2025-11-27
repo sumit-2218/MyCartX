@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - MyCartX</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f7fa;
+    }
+
+    header {
+      background-color: #007bff;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+    }
+
+    header h1 { margin: 0; }
+
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover { color: #ffeb3b; }
+
+    h2 {
+      text-align: center;
+      margin-top: 25px;
+      margin-bottom: 10px;
+    }
+
+    .profile-container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+
+    .profile-item {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+
+    .label {
+      color: #007bff;
+      font-weight: 600;
+    }
+
+    .edit-btn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background: #ff5722;
+      color: white;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .edit-btn:hover {
+      background: #e64a19;
+    }
+
+    footer {
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>MyCartX</h1>
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="cart.html">Cart</a>
+    <a href="profile.html">Profile</a>
+    <a href="login.html">Logout</a>
+  </nav>
+</header>
+
+<h2>Your Profile</h2>
+
+<div class="profile-container">
+  <p class="profile-item"><span class="label">Name:</span>
+    <input type="text" id="p_name" disabled style="width:70%; padding:8px; border-radius:6px; border:1px solid #ccc;">
+  </p>
+  <p class="profile-item"><span class="label">Email:</span>
+    <input type="email" id="p_email" disabled style="width:70%; padding:8px; border-radius:6px; border:1px solid #ccc;">
+  </p>
+  <p class="profile-item"><span class="label">Phone:</span>
+    <input type="text" id="p_phone" disabled style="width:70%; padding:8px; border-radius:6px; border:1px solid #ccc;">
+  </p>
+  <p class="profile-item"><span class="label">Address:</span>
+    <input type="text" id="p_address" disabled style="width:70%; padding:8px; border-radius:6px; border:1px solid #ccc;">
+  </p>
+
+  <button class="edit-btn" id="editProfileBtn" style="background:#007bff;">Edit Profile</button>
+  <button class="edit-btn" id="saveProfileBtn" style="display:none;">Save Profile</button>
+</div>
+
+<footer>
+  <p>© 2025 MyCartX</p>
+</footer>
+
+<script>
+  // Get saved user details from localStorage
+  const name = localStorage.getItem("user_name");
+  const email = localStorage.getItem("user_email");
+  const phone = localStorage.getItem("user_phone");
+  const address = localStorage.getItem("user_address");
+
+  // Show data in page
+  if(name) document.getElementById("p_name").value = name;
+  if(email) document.getElementById("p_email").value = email;
+  if(phone) document.getElementById("p_phone").value = phone;
+  if(address) document.getElementById("p_address").value = address;
+
+  document.getElementById("editProfileBtn").addEventListener("click", function() {
+      document.getElementById("p_name").disabled = false;
+      document.getElementById("p_email").disabled = false;
+      document.getElementById("p_phone").disabled = false;
+      document.getElementById("p_address").disabled = false;
+
+      document.getElementById("editProfileBtn").style.display = "none";
+      document.getElementById("saveProfileBtn").style.display = "block";
+  });
+
+  document.getElementById("saveProfileBtn").addEventListener("click", function() {
+      const updatedName = document.getElementById("p_name").value;
+      const updatedEmail = document.getElementById("p_email").value;
+      const updatedPhone = document.getElementById("p_phone").value;
+      const updatedAddress = document.getElementById("p_address").value;
+
+      localStorage.setItem("user_name", updatedName);
+      localStorage.setItem("user_email", updatedEmail);
+      localStorage.setItem("user_phone", updatedPhone);
+      localStorage.setItem("user_address", updatedAddress);
+
+      alert("Profile updated successfully!");
+
+      document.getElementById("p_name").disabled = true;
+      document.getElementById("p_email").disabled = true;
+      document.getElementById("p_phone").disabled = true;
+      document.getElementById("p_address").disabled = true;
+
+      document.getElementById("saveProfileBtn").style.display = "none";
+      document.getElementById("editProfileBtn").style.display = "block";
+  });
+</script>
+
+</body>
+</html>

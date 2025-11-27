@@ -1,0 +1,103 @@
+/* For login page */
+
+/* login.css - Modern, Responsive CSS for MyCartX Login Page */
+
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: linear-gradient(135deg, #6C63FF, #3F3D56);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    background: #fff;
+    padding: 40px 50px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 360px;
+    max-width: 90%;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.login-container:hover {
+    transform: translateY(-5px);
+}
+
+.login-container h1 {
+    color: #6C63FF;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container input {
+    margin: 12px 0;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.login-container input:focus {
+    border-color: #6C63FF;
+    box-shadow: 0 0 8px rgba(108, 99, 255, 0.4);
+    outline: none;
+}
+
+.login-container button {
+    background: #6C63FF;
+    color: #fff;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.login-container button:hover {
+    background: #574bff;
+    transform: scale(1.05);
+}
+
+.login-container p {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.login-container a {
+    color: #6C63FF;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.login-container a:hover {
+    color: #574bff;
+}
+
+/* Responsive for mobile devices */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 30px 25px;
+    }
+
+    .login-container h1 {
+        font-size: 1.5rem;
+    }
+
+    .login-container input, .login-container button {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+}
