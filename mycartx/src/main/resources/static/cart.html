@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MyCartX | Cart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f6fa;
+    }
+
+    header {
+      background: #007bff;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .name {
+      font-weight: bold;
+    }
+
+    .price {
+      color: #e91e63;
+    }
+
+    input[type="number"] {
+      width: 60px;
+      padding: 5px;
+    }
+
+    button {
+      padding: 6px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .remove-btn {
+      background: #e74c3c;
+      color: white;
+    }
+
+    .total {
+      text-align: right;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .checkout {
+      width: 100%;
+      padding: 12px;
+      background: #007bff;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>MyCartX</h1>
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="cart.html">Cart</a>
+    <a href="login.html">Logout</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Your Cart</h2>
+
+  <div id="cartItems"></div>
+
+  <div class="total" id="totalPrice">Total: ₹0</div>
+
+  <button class="checkout">Proceed to Checkout</button>
+</div>
+
+<script>
+  const API_BASE = "https://aetiological-confarreate-lyle.ngrok-free.dev";
+  const userId = localStorage.getItem("userId");
+
+  if (!userId) {
+    alert("Please login first");
+    window.location.href = "login.html";
+  }
+
+  function loadCart() {
+    fetch(`${API_BASE}/api/cart/${userId}`)
+    .then(res => res.json())
+      .then(data => {
+        const cartDiv = document.getElementById("cartItems");
+        cartDiv.innerHTML = "";
+
+        if (data.length === 0) {
+          cartDiv.innerHTML = "<p>Your cart is empty.</p>";
+          document.getElementById("totalPrice").innerText = "Total: ₹0";
+          return;
+        }
+
+        let total = 0;
+
+        data.forEach(item => {
+          total += item.productPrice * item.quantity;
+
+          cartDiv.innerHTML += `
+            <div class="cart-item">
+              <div>
+                <div class="name">${item.productName}</div>
+                <div class="price">₹${item.productPrice}</div>
+              </div>
+
+              <input type="number" value="${item.quantity}" min="1"
+                onchange="updateQty(${item.id}, this.value)">
+
+              <button class="remove-btn"
+                onclick="removeItem(${item.id})">Remove</button>
+            </div>
+          `;
+        });
+
+        document.getElementById("totalPrice").innerText =
+          "Total: ₹" + total;
+      });
+  }
+
+  function updateQty(cartId, qty) {
+    fetch(`${API_BASE}/api/cart/update/${cartId}/${qty}`, {
+      method: "PUT"
+    }).then(() => loadCart());
+  }
+
+  function removeItem(cartId) {
+    fetch(`${API_BASE}/api/cart/remove/${cartId}`, {
+      method: "DELETE"
+    }).then(() => loadCart());
+  }
+
+  loadCart();
+</script>
+
+</body>
+</html>

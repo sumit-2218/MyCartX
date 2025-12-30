@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - MyCartX</title>
+  <style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', Arial, sans-serif;
+        background-color: #f5f7fa;
+        color: #333;
+        margin-left: 0; /* Removed fixed sidebar space */
+        transition: margin-left 0.4s ease;
+    }
+
+    header {
+        background-color: #007bff;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+    }
+    .menu-btn {
+        font-size: 1.8rem;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        margin-right: 15px;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 1.8rem;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+        color: #ffc107;
+    }
+
+    main {
+        padding: 30px;
+        text-align: center;
+    }
+
+    main h2 {
+        font-size: 1.6rem;
+        margin-bottom: 25px;
+    }
+
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .product-card {
+        background-color: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .product-name {
+        font-size: 1.1rem;
+        margin: 5px 0;
+        font-weight: 600;
+    }
+
+    .product-price {
+        font-size: 1rem;
+        color: #007bff;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    .add-cart-btn {
+        padding: 10px 15px;
+        border: none;
+        background-color: #ff5722;
+        color: white;
+        font-size: 0.9rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .add-cart-btn:hover {
+        background-color: #e64a19;
+    }
+
+    .buy-now-btn {
+        padding: 10px 15px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        font-size: 0.9rem;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 8px;
+        width: 100%;
+        transition: background 0.3s;
+    }
+
+    .buy-now-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    footer {
+        background-color: #a11111;
+        color: white;
+        text-align: center;
+        padding: 15px 0;
+        margin-top: 400px;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+        header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        nav a {
+            margin-left: 0;
+            margin-right: 15px;
+        }
+    }
+    .search-bar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .search-bar input {
+        padding: 8px 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        width: 220px;
+        font-size: 0.9rem;
+    }
+    .search-bar button {
+        padding: 8px 14px;
+        background-color: #ffc107;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .search-bar button:hover {
+        background-color: #e0a800;
+    }
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 200px;
+        height: 100%;
+        background-color: #222;
+        padding-top: 80px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding-left: 20px;
+    }
+    .sidebar a {
+        color: #ddd;
+        text-decoration: none;
+        font-size: 1rem;
+    }
+    .sidebar a:hover {
+        color: #ffc107;
+    }
+    .hidden-sidebar {
+        transform: translateX(-220px);
+        transition: transform 0.3s ease;
+    }
+    .sidebar.shown {
+        transform: translateX(0);
+    }
+    body.with-sidebar {
+        margin-left: 220px !important;
+        transition: margin-left 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar" class="sidebar hidden-sidebar">
+      <h3>Categories</h3>
+      <a href="#">Electronics</a>
+      <a href="#">Fashion</a>
+      <a href="#">Home Appliances</a>
+      <a href="#">Mobiles</a>
+      <a href="#">Sports</a>
+      <a href="#">Accessories</a>
+  </div>
+  <header>
+    <button id="menuBtn" class="menu-btn">☰</button>
+    <h1>MyCartX</h1>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search products...">
+        <button id="searchBtn">Search</button>
+    </div>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="cart.html">Cart</a>
+      <a href="profile.html">Profile</a>
+      <a href="login.html">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Welcome, <span id="username">User</span>!</h2>
+
+    <h3 style="margin-top: 10px; font-weight: 500;">Featured Products</h3>
+
+    <div class="products-grid">
+
+      
+
+      
+      <div class="product-card">
+        <img src="https://alwaysriding.in/cdn/shop/files/AGNAR-TEKTRON-MA-263-5.webp?v=1749761891&width=1946" class="product-img">
+        <h4 class="product-name">Bike helmets</h4>
+        <p class="product-price">₹2299</p>
+        <button class="add-cart-btn" onclick="addToCart('Bike helmets', 2299)">Add to Cart</button>
+        <button class="buy-now-btn">Buy Now</button>
+      </div>
+
+      <div class="product-card">
+        <img src="https://rukminim2.flixcart.com/image/480/640/xif0q/computer/o/x/e/-original-imah2thbvcyxcazg.jpeg?q=90" class="product-img">
+        <h4 class="product-name">MacBook Air M1</h4>
+        <p class="product-price">₹73000</p>
+        <button class="add-cart-btn" onclick="addToCart('MacBook Air M1', 73000)">Add to Cart</button>
+        <button class="buy-now-btn">Buy Now</button>
+      </div>
+
+      <div class="product-card">
+        <img src="https://rukminim2.flixcart.com/image/480/640/xif0q/computer/o/x/e/-original-imah2thbvcyxcazg.jpeg?q=90" class="product-img">
+        <h4 class="product-name">MacBook Air M2</h4>
+        <p class="product-price">₹83000</p>
+        <button class="add-cart-btn" onclick="addToCart('MacBook Air M2', 83000)">Add to Cart</button>
+        <button class="buy-now-btn">Buy Now</button>
+      </div>
+
+      <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/61BTIyv+XdL.jpg" class="product-img">
+        <h4 class="product-name">OnePlus 13s</h4>
+        <p class="product-price">₹43000</p>
+        <button class="add-cart-btn" onclick="addToCart('OnePlus 13s', 43000)">Add to Cart</button>
+        <button class="buy-now-btn">Buy Now</button>
+      </div>
+
+      <div class="product-card">
+        <img src="https://rukminim2.flixcart.com/image/480/640/xif0q/computer/o/x/e/-original-imah2thbvcyxcazg.jpeg?q=90" class="product-img">
+        <h4 class="product-name">MacBook Air M4</h4>
+        <p class="product-price">₹93000</p>
+        <button class="add-cart-btn" onclick="addToCart('MacBook Air M4', 93000)">Add to Cart</button>
+        <button class="buy-now-btn">Buy Now</button>
+      </div>
+
+      
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 MyCartX</p>
+  </footer>
+
+  <script>
+    // Example: fetch logged-in user from localStorage or sessionStorage
+    const loggedUser = localStorage.getItem('loggedInUser'); // store username on login
+    if(loggedUser){
+        document.getElementById('username').textContent = loggedUser;
+    }
+
+    document.getElementById('searchBtn').addEventListener('click', function() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const products = document.querySelectorAll('.product-card');
+
+        products.forEach(card => {
+            const name = card.querySelector('.product-name').textContent.toLowerCase();
+            card.style.display = name.includes(query) ? 'block' : 'none';
+        });
+    });
+
+  const menuBtn = document.getElementById('menuBtn');
+  const sidebar = document.getElementById('sidebar');
+
+  menuBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('shown');
+      document.body.classList.toggle('with-sidebar');
+  });
+
+    // Buy Now Functionality (Frontend Only)
+    const buyNowButtons = document.querySelectorAll('.buy-now-btn');
+    buyNowButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            alert("Proceeding to checkout...");
+        });
+    });
+
+    function addToCart(name, price) {
+        const userId = localStorage.getItem("user_id");
+
+        if (!userId) {
+          alert("Please login first.");
+          return;
+        }
+
+        fetch("https://aetiological-confarreate-lyle.ngrok-free.dev/api/cart/add", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                userId: userId,
+                productName: name,
+                productPrice: price,
+                quantity: 1
+            })
+        })
+        .then(res => res.text())
+        .then(msg => {
+            alert(msg);
+        })
+        .catch(err => {
+            alert("Failed to add item to cart.");
+        });
+    }
+  </script>
+</body>
+</html>
